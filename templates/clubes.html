@@ -12,9 +12,9 @@
       </a>
     </div>
 
-    <!-- Grid principal: motivacional + formulario + lista clubes -->
+    <!-- Grid principal: motivacional,formulario,  lista clubes -->
     <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-      <!-- Formulario + Lista de Clubes (primero en móvil, segundo en escritorio) -->
+      <!-- Formulario y Lista de Clubes -->
       <div class="col-span-1 lg:col-span-2 flex flex-col gap-7 order-1 lg:order-2">
         <!-- Título y descripción -->
         <div>
@@ -24,7 +24,7 @@
           </div>
           <p class="mb-3 text-gray-700">Inscríbete como coach o participante en nuestros clubes. Actividades lideradas por colaboradores para colaboradores.</p>
         </div>
-        <!-- Mensajes -->
+        <!-- msjs -->
         {% if msg %}
           <div class="mb-2 bg-green-50 border-l-4 border-green-400 text-green-700 p-3 rounded shadow">{{ msg }}</div>
         {% endif %}
@@ -86,10 +86,9 @@
           </div>
         </div>
       </div>
-      <!-- Card Ilustrada Motivacional (después en móvil, primero en escritorio) -->
+      <!-- Card Ilustrada Motivacional (Recordatorio mio: después en móvil, primero en escritorio) -->
       <div class="col-span-1 flex flex-col items-center p-4 order-2 lg:order-1">
         <div class="w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden border border-gray-200/75 flex flex-col">
-          <!-- Imagen arriba, ocupa la mitad de la card -->
           <div class="w-full aspect-[4/3] sm:aspect-[3/2] bg-[#fff9f1] relative">
             <img src="{{ url_for('static', filename='img/clubes-ilustracion.png') }}" alt="Ilustración Clubes BI" class="absolute inset-0 w-full h-full object-cover object-center" />
           </div>

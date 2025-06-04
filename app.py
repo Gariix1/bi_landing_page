@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-# Simulación de datos en memoria
+# simulacion de datos en memoria
 EQUIPOS = []
 INSCRIPCIONES_CLUBES = []
 
@@ -60,7 +60,7 @@ def clubes():
         nombre = request.form.get('nombre', '').strip()
         club = request.form.get('club', '').strip()
         rol = request.form.get('rol', '').strip()
-        # Validación sencilla (podrías agregar más)
+        #validacion (esto es escalable)
         if not nombre or not club or not rol:
             msg = "Por favor completa todos los campos."
         else:
