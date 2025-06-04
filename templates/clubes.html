@@ -1,85 +1,113 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Clubes | Actívate BI</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-</head>
-<body class="bg-[#F1F1F1] min-h-screen font-sans">
-    <div class="max-w-2xl mx-auto py-8 px-4">
-        <!-- Volver -->
-        <a href="{{ url_for('index') }}" class="inline-flex items-center gap-2 mb-6 text-[#b06d00] font-semibold hover:underline">
-            <i data-feather="arrow-left" class="w-5 h-5"></i> Volver al inicio
-        </a>
-        <!-- Título -->
-        <div class="flex items-center gap-2 mb-3">
+{% extends 'base.html' %}
+{% block title %}
+  Clubes
+{% endblock %}
+
+{% block content %}
+  <div class="w-full flex flex-col items-center px-2 md:px-0 py-8">
+    <!-- Volver -->
+    <div class="w-full max-w-4xl flex justify-start">
+      <a href="{{ url_for('index') }}" class="inline-flex items-center gap-2 mb-4 text-[#b06d00] font-semibold hover:underline"><i data-feather="arrow-left" class="w-5 h-5"></i> Volver al inicio</a>
+    </div>
+
+    <!-- Grid principal: motivacional + formulario + lista clubes -->
+    <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+      <!-- Card Ilustrada Motivacional -->
+      <div class="col-span-1 flex flex-col items-center p-4">
+        <div class="w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden border border-gray-200/75 flex flex-col">
+          <!-- Imagen arriba, ocupa la mitad de la card -->
+          <div class="w-full aspect-[4/3] sm:aspect-[3/2] bg-[#fff9f1] relative">
+            <img src="{{ url_for('static', filename='img/clubes-ilustracion.png') }}" alt="Ilustración Clubes BI" class="absolute inset-0 w-full h-full object-cover object-center" />
+          </div>
+
+          <!-- Contenido card -->
+          <div class="p-6 sm:p-8 text-center flex flex-col flex-1 justify-between">
+            <blockquote class="text-lg font-medium text-gray-700 leading-relaxed mb-6 relative px-2">
+              <span class="absolute left-0 top-0 text-5xl text-amber-400 -mt-2 font-serif opacity-70 transform -translate-x-1 select-none">“</span>
+              Crecer juntos, compartir talentos. Descubre tu pasión y haz una comunidad con Banco Internacional.
+              <span class="absolute right-0 bottom-0 text-5xl text-amber-400 -mb-3 font-serif opacity-70 transform translate-x-1 select-none">”</span>
+            </blockquote>
+            <span class="block text-sm font-semibold text-amber-600 tracking-wide">Banco Internacional</span>
+          </div>
+
+          <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500"></div>
+        </div>
+      </div>
+
+      <!-- Formulario + Lista de Clubes -->
+      <div class="col-span-1 lg:col-span-2 flex flex-col gap-7">
+        <!-- Título y descripción -->
+        <div>
+          <div class="flex items-center gap-2 mb-2">
             <i data-feather="activity" class="w-8 h-8 text-[#EEA554]"></i>
             <h1 class="text-2xl md:text-3xl font-bold text-[#b06d00]">Clubes</h1>
+          </div>
+          <p class="mb-3 text-gray-700">Inscríbete como coach o participante en nuestros clubes. Actividades lideradas por colaboradores para colaboradores.</p>
         </div>
-        <p class="mb-6 text-gray-700">Inscríbete como coach o participante en nuestros clubes. Actividades lideradas por colaboradores para colaboradores.</p>
         <!-- Mensajes -->
         {% if msg %}
-            <div class="mb-4 bg-green-50 border-l-4 border-green-400 text-green-700 p-3 rounded shadow">
-                {{ msg }}
-            </div>
+          <div class="mb-2 bg-green-50 border-l-4 border-green-400 text-green-700 p-3 rounded shadow">{{ msg }}</div>
         {% endif %}
         {% if error %}
-            <div class="mb-4 bg-red-50 border-l-4 border-red-400 text-red-700 p-3 rounded shadow">
-                {{ error }}
-            </div>
+          <div class="mb-2 bg-red-50 border-l-4 border-red-400 text-red-700 p-3 rounded shadow">{{ error }}</div>
         {% endif %}
         <!-- Formulario -->
-        <form method="POST" class="bg-white rounded-xl shadow-lg p-6 mb-8 flex flex-col gap-4">
-            <label class="font-semibold text-[#b06d00]">Nombre
-                <input name="nombre" placeholder="Tu nombre" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
-            </label>
-            <label class="font-semibold text-[#b06d00]">Club
-                <select name="club" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
-                    <option value="">Selecciona un club</option>
-                    {% for club in clubes %}
-                    <option value="{{ club.nombre }}">{{ club.nombre }}</option>
-                    {% endfor %}
-                </select>
-            </label>
-            <label class="font-semibold text-[#b06d00]">Rol
-                <select name="rol" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
-                    <option value="">Quiero ser...</option>
-                    <option value="Coach">Coach</option>
-                    <option value="Participante">Participante</option>
-                </select>
-            </label>
-            <button type="submit" class="bg-[#EEA554] text-white font-bold py-2 rounded-lg shadow hover:bg-[#ECB579] transition mt-2">
-                Enviar inscripción
-            </button>
+        <form method="POST" class="bg-white rounded-xl shadow-lg p-6 flex flex-col gap-4">
+          <label class="font-semibold text-[#b06d00]">Nombre<input name="nombre" placeholder="Tu nombre" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" /></label>
+          <label class="font-semibold text-[#b06d00]">
+            Club<select name="club" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
+              <option value="">Selecciona un club</option>
+              {% for club in clubes %}
+                <option value="{{ club.nombre }}">{{ club.nombre }}</option>
+              {% endfor %}
+            </select>
+          </label>
+          <label class="font-semibold text-[#b06d00]">
+            Rol<select name="rol" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
+              <option value="">Quiero ser...</option>
+              <option value="Coach">Coach</option>
+              <option value="Participante">Participante</option>
+            </select>
+          </label>
+          <button type="submit" class="bg-[#EEA554] text-white font-bold py-2 rounded-lg shadow hover:bg-[#ECB579] transition mt-2">Enviar inscripción</button>
         </form>
+
         <!-- Lista de clubes -->
-        <h2 class="text-xl font-bold text-[#b06d00] mb-4 flex items-center gap-2">
+        <div>
+          <h2 class="text-xl font-bold text-[#b06d00] mb-4 flex items-center gap-2">
             <i data-feather="users" class="w-6 h-6 text-[#EEA554]"></i>
             Lista de Clubes
-        </h2>
-        <div class="grid gap-5">
-        {% for club in clubes %}
-            <div class="bg-white rounded-xl shadow-md p-4">
-                <div class="flex items-center gap-3 mb-1">
+          </h2>
+          <div class="flex justify-center w-full">
+            <div class="grid gap-5 w-full max-w-md">
+              {% for club in clubes %}
+                <div class="bg-white rounded-xl shadow-md p-4">
+                  <div class="flex items-center gap-3 mb-1">
                     <i data-feather="award" class="w-6 h-6 text-[#ECB579]"></i>
                     <span class="font-semibold text-[#b06d00] text-lg">{{ club.nombre }}</span>
                     <span class="text-sm text-gray-500 ml-3">{{ club.modalidad }}</span>
-                </div>
-                <div class="text-sm text-gray-700 mb-1">
+                  </div>
+                  <div class="text-sm text-gray-700 mb-1">
                     <b>Coach:</b> {{ club.coach }}
-                </div>
-                <div class="text-sm text-gray-700 mb-1">
+                  </div>
+                  <div class="text-sm text-gray-700 mb-1">
                     <b>Horario:</b> {{ club.horario }}
-                </div>
-                <div class="text-sm text-gray-700">
+                  </div>
+                  <div class="text-sm text-gray-700">
                     <b>Lugar:</b> {{ club.ubicacion }}
+                  </div>
                 </div>
+              {% endfor %}
             </div>
-        {% endfor %}
+          </div>
         </div>
+      </div>
     </div>
-    <script>feather.replace()</script>
-</body>
-</html>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    feather.replace()
+  </script>
+{% endblock %}

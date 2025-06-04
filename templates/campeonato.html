@@ -2,7 +2,173 @@
 {% block title %}Campeonato de Fútbol{% endblock %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto py-8 px-4">
-    <!-- Tu contenido de campeonato aquí (usa el mismo diseño que ya tienes) -->
+<div class="w-full flex flex-col items-center px-2 md:px-0 py-8">
+    <!-- Volver -->
+    <div class="w-full max-w-4xl flex justify-start">
+        <a href="{{ url_for('index') }}" class="inline-flex items-center gap-2 mb-4 text-[#b06d00] font-semibold hover:underline">
+            <i data-feather="arrow-left" class="w-5 h-5"></i> Volver al inicio
+        </a>
+    </div>
+    <!-- Grid principal -->
+    <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+<div class="col-span-1 lg:col-span-1 flex flex-col items-center p-4">
+    <div class="w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-lg hover:shadow-xl
+                transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden border border-gray-200/75 flex flex-col">
+        
+        <!-- Imagen arriba, ocupa la mitad de la card -->
+        <div class="w-full aspect-[4/3] sm:aspect-[3/2] bg-[#fff9f1] relative">
+            <img src="{{ url_for('static', filename='img/campeonato-ilustracion.png') }}"
+                 alt="Ilustración Campeonato de Fútbol"
+                 class="absolute inset-0 w-full h-full object-cover object-center" />
+        </div>
+        
+        <!-- Contenido card -->
+        <div class="p-6 sm:p-8 text-center flex flex-col flex-1 justify-between">
+            <blockquote class="text-lg font-medium text-gray-700 leading-relaxed mb-6 relative px-2">
+                <span class="absolute left-0 top-0 text-5xl text-amber-400 -mt-2 font-serif opacity-70 transform -translate-x-1 select-none">“</span>
+                El trabajo en equipo nos hace grandes.<br class="hidden sm:inline"> ¡Actívate, vive tu pasión y haz historia juntos!
+                <span class="absolute right-0 bottom-0 text-5xl text-amber-400 -mb-3 font-serif opacity-70 transform translate-x-1 select-none">”</span>
+            </blockquote>
+            <span class="block text-sm font-semibold text-amber-600 tracking-wide">
+                Banco Internacional
+            </span>
+        </div>
+
+        <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500"></div>
+    </div>
 </div>
+        <!-- Info principal -->
+        <div class="col-span-1 lg:col-span-2 flex flex-col gap-7">
+            <!-- Título y descripción -->
+            <div>
+                <div class="flex items-center gap-2 mb-2">
+                    <i data-feather="users" class="w-8 h-8 text-[#EEA554]"></i>
+                    <h1 class="text-2xl md:text-3xl font-bold text-[#b06d00]">Campeonato de Fútbol</h1>
+                </div>
+                <p class="mb-3 text-gray-700">
+                    Se juega una vez al año en Quito, categorías femenina y masculina. Duración: marzo a mayo.
+                </p>
+            </div>
+            <!-- Mensajes -->
+            {% if error %}
+                <div class="mb-2 bg-red-50 border-l-4 border-red-400 text-red-700 p-3 rounded shadow">
+                    {{ error }}
+                </div>
+            {% endif %}
+            {% if msg %}
+                <div class="mb-2 bg-green-50 border-l-4 border-green-400 text-green-700 p-3 rounded shadow">
+                    {{ msg }}
+                </div>
+            {% endif %}
+            <!-- Inscripción -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-xl font-semibold text-[#b06d00] mb-3 flex items-center gap-2">
+                    <i data-feather="edit" class="w-5 h-5 text-[#ECB579]"></i> Inscribir nuevo equipo
+                </h2>
+                <form method="POST" class="flex flex-col gap-4">
+    <label class="font-semibold text-[#b06d00]">Nombre del equipo
+        <input name="nombre" value="{{ request.form.get('nombre','') }}" placeholder="Nombre del equipo" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
+    </label>
+    <label class="font-semibold text-[#b06d00]">Ciudad
+        <input name="ciudad" value="Quito" readonly
+            class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 bg-gray-100 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
+        <span class="text-xs text-gray-400">Por ahora, solo equipos de Quito.</span>
+    </label>
+    <label class="font-semibold text-[#b06d00]">Categoría
+        <select name="genero" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
+            <option value="">Selecciona</option>
+            <option value="Femenina" {% if request.form.get('genero') == 'Femenina' %}selected{% endif %}>Femenina</option>
+            <option value="Masculina" {% if request.form.get('genero') == 'Masculina' %}selected{% endif %}>Masculina</option>
+        </select>
+    </label>
+    <label class="font-semibold text-[#b06d00]">Integrantes <span class="text-xs font-normal text-gray-500">(mínimo 5, máximo 12, separados por coma)</span>
+        <input name="integrantes" value="{{ request.form.get('integrantes','') }}" placeholder="Nombre1, Nombre2, ..." required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
+    </label>
+    <button type="submit" class="bg-[#EEA554] text-white font-bold py-2 rounded-lg shadow hover:bg-[#ECB579] transition mt-2">
+        Inscribir equipo
+    </button>
+</form>
+            </div>
+        </div>
+    </div>
+    <!-- Equipos inscritos + Estadísticas + Lugar + Reglamento -->
+    <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Equipos inscritos y estadísticas -->
+        <div>
+            <h2 class="text-xl font-bold text-[#b06d00] mb-2 flex items-center gap-2">
+                <i data-feather="list" class="w-6 h-6 text-[#EEA554]"></i> Equipos inscritos
+            </h2>
+            <ul class="mb-8 grid gap-3">
+            {% for eq in equipos %}
+                <li class="bg-white rounded-lg shadow px-4 py-3 text-gray-700">
+                    <span class="font-semibold text-[#b06d00]">{{ eq.nombre }}</span> · <span class="text-gray-600">{{ eq.genero }}</span>
+                    <br>
+                    <span class="text-sm">Integrantes: {{ eq.integrantes }}</span>
+                </li>
+            {% else %}
+                <li class="text-gray-500 text-center py-3">No hay equipos inscritos aún.</li>
+            {% endfor %}
+            </ul>
+            <h2 class="text-xl font-bold text-[#b06d00] mb-2 flex items-center gap-2">
+                <i data-feather="bar-chart-2" class="w-6 h-6 text-[#EEA554]"></i> Estadísticas del campeonato
+            </h2>
+            <ul class="mb-8 grid grid-cols-2 gap-3 text-center">
+                <li class="bg-white rounded-xl p-3 shadow font-semibold text-[#b06d00]">Equipos: <span class="text-black">{{ equipos|length }}</span></li>
+                <li class="bg-white rounded-xl p-3 shadow font-semibold text-[#b06d00]">Partidos: <span class="text-black">12</span></li>
+                <li class="bg-white rounded-xl p-3 shadow font-semibold text-[#b06d00]">Goles: <span class="text-black">34</span></li>
+                <li class="bg-white rounded-xl p-3 shadow font-semibold text-[#b06d00]">Duración: <span class="text-black">marzo a mayo</span></li>
+            </ul>
+        </div>
+        <!-- Lugar de juego + Reglamento -->
+        <div>
+            <h2 class="text-xl font-bold text-[#b06d00] mb-2 flex items-center gap-2">
+                <i data-feather="map-pin" class="w-6 h-6 text-[#EEA554]"></i> Lugar de juego
+            </h2>
+            <div class="mb-8 bg-white rounded-xl shadow p-4">
+                <p class="font-semibold text-[#b06d00]">Parque La Carolina, Quito</p>
+                <iframe src="https://www.google.com/maps?q=Parque+La+Carolina,+Quito,+Ecuador&output=embed" width="100%" height="200" class="mt-2 rounded-md border"></iframe>
+            </div>
+            <h2 class="text-xl font-bold text-[#b06d00] mb-2 flex items-center gap-2">
+                <i data-feather="file-text" class="w-6 h-6 text-[#EEA554]"></i> Reglamento del Campeonato
+            </h2>
+            <button onclick="abrirReglamento()" class="mb-6 bg-[#EEA554] hover:bg-[#ECB579] text-white font-bold px-6 py-2 rounded-xl shadow transition">Ver reglamento aquí</button>
+            <!-- Modal -->
+            <div id="modal-reglamento" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
+                <div id="modal-content" class="bg-white rounded-2xl shadow-2xl max-w-xl w-full p-8 relative animate-fade-in-up">
+                    <button onclick="cerrarReglamento()" class="absolute top-4 right-4 text-gray-400 hover:text-[#b06d00]">
+                        <i data-feather="x" class="w-6 h-6"></i>
+                    </button>
+                    <h3 class="text-lg font-bold mb-4 text-[#b06d00]">Reglamento del Campeonato de Fútbol - Actívate BI</h3>
+                        <ol class="list-decimal ml-5 space-y-2 text-gray-700 text-base">
+                            <li><b>Valores institucionales:</b> Todos los equipos y jugadores deben actuar con respeto, honestidad e integridad, promoviendo el compañerismo y la inclusión, alineados a la cultura de Banco Internacional.</li>
+                            <li><b>Equipos:</b> Cada equipo debe inscribir entre 5 y 12 colaboradores.</li>
+                            <li><b>Uniforme:</b> Cada equipo debe presentarse con camiseta del mismo color, permitiendo personalización con el nombre del equipo.</li>
+                            <li><b>Duración de partidos:</b> 2 tiempos de 20 minutos, 5 minutos de descanso.</li>
+                            <li><b>Reglas básicas de juego:</b> Se aplican reglas oficiales de fútbol 7, con excepción de fuera de juego.</li>
+                            <li><b>Fair play:</b> No se permite lenguaje ofensivo ni actitudes antideportivas. Las faltas de respeto podrán llevar a la expulsión del jugador o equipo.</li>
+                            <li><b>Puntualidad:</b> Los equipos deben estar presentes 10 minutos antes de cada partido. El equipo que llegue tarde perderá por default.</li>
+                            <li><b>Género:</b> Se jugarán categorías femenina y masculina, cada una con su respectiva tabla de posiciones.</li>
+                            <li><b>Arbitraje:</b> Las decisiones del árbitro serán inapelables.</li>
+                            <li><b>Premiación:</b> Se reconocerán equipos campeones, mejores jugadores y premios al juego limpio.</li>
+                            <li><b>Cuidado del espacio:</b> Está prohibido dejar basura o dañar las instalaciones del parque.</li>
+                            <li><b>Seguridad:</b> Se recomienda portar identificación y seguir las indicaciones de los organizadores ante cualquier emergencia.</li>
+                        </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  feather.replace();
+  // Modal reglamento (abre/cierra)
+  function abrirReglamento() {
+      document.getElementById('modal-reglamento').classList.remove('hidden');
+  }
+  function cerrarReglamento() {
+      document.getElementById('modal-reglamento').classList.add('hidden');
+  }
+</script>
 {% endblock %}

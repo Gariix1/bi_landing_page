@@ -19,25 +19,29 @@ def campeonato():
         ciudad = request.form.get('ciudad', '').strip()
         genero = request.form.get('genero', '').strip()
         integrantes = request.form.get('integrantes', '').strip()
-        # Validaciones básicas
+
+        # Validaciones
         if not nombre or not ciudad or not genero or not integrantes:
             error = 'Por favor completa todos los campos.'
         elif ciudad.lower() != 'quito':
             error = 'Solo se permiten equipos de la ciudad de Quito.'
         elif genero not in ['Femenina', 'Masculina']:
             error = 'Categoría inválida.'
-        elif len(integrantes.split(',')) < 5 or len(integrantes.split(',')) > 12:
-            error = 'El equipo debe tener entre 5 y 12 integrantes.'
-        elif any(eq['nombre'].lower() == nombre.lower() for eq in EQUIPOS):
-            error = 'Ya existe un equipo con ese nombre.'
         else:
-            EQUIPOS.append({
-                'nombre': nombre,
-                'ciudad': ciudad,
-                'genero': genero,
-                'integrantes': integrantes
-            })
-            msg = '¡Equipo inscrito correctamente!'
+            lista_integrantes = [x.strip() for x in integrantes.split(',') if x.strip()]
+            if len(lista_integrantes) < 5 or len(lista_integrantes) > 12:
+                error = 'El equipo debe tener entre 5 y 12 integrantes.'
+            elif any(eq['nombre'].lower() == nombre.lower() for eq in EQUIPOS):
+                error = 'Ya existe un equipo con ese nombre.'
+            else:
+                EQUIPOS.append({
+                    'nombre': nombre,
+                    'ciudad': ciudad,
+                    'genero': genero,
+                    'integrantes': ', '.join(lista_integrantes)
+                })
+                msg = '¡Equipo inscrito correctamente!'
+
     return render_template('campeonato.html', equipos=EQUIPOS, msg=msg, error=error)
 
 @app.route('/manana')
@@ -53,15 +57,19 @@ def clubes():
         {'nombre': 'Lectura', 'modalidad': 'Híbrido', 'coach': 'Pedro Pérez', 'horario': 'Miércoles 17:00-18:00', 'ubicacion': 'Teams / Sala Creando Más'}
     ]
     if request.method == 'POST':
-        nombre = request.form.get('nombre')
-        club = request.form.get('club')
-        rol = request.form.get('rol')
-        INSCRIPCIONES_CLUBES.append({
-            'nombre': nombre,
-            'club': club,
-            'rol': rol
-        })
-        msg = '¡Inscripción enviada correctamente!'
+        nombre = request.form.get('nombre', '').strip()
+        club = request.form.get('club', '').strip()
+        rol = request.form.get('rol', '').strip()
+        # Validación sencilla (podrías agregar más)
+        if not nombre or not club or not rol:
+            msg = "Por favor completa todos los campos."
+        else:
+            INSCRIPCIONES_CLUBES.append({
+                'nombre': nombre,
+                'club': club,
+                'rol': rol
+            })
+            msg = '¡Inscripción enviada correctamente!'
     return render_template('clubes.html', clubes=CLUBES_LIST, msg=msg)
 
 if __name__ == '__main__':
