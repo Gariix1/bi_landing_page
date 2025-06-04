@@ -1,0 +1,25 @@
+<!-- templates/navbar.html -->
+<header id="navbar" class="sticky top-0 z-50 bg-naranja shadow-lg">
+  <div id="navbar-main" class="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 md:py-4">
+    <a href="{{ url_for('index') }}" class="flex items-center gap-3 shrink-0">
+      <img id="navbar-logo" class="h-16 md:h-20 w-auto object-contain" src="{{ url_for('static', filename='img/logo-bi.png') }}" alt="Banco Internacional logo" />
+    </a>
+    <nav class="flex items-center gap-2 md:gap-4">
+      <a href="{{ url_for('campeonato') }}" class="flex items-center gap-2 text-white font-semibold px-3 py-2 md:px-4 md:py-2.5 rounded-lg hover-bg-naranja-claro hover-text-marron transition-colors duration-150">
+        <i data-feather="users" class="w-5 h-5"></i>
+        <span class="hidden sm:inline">Campeonato</span>
+      </a>
+      <a href="{{ url_for('manana') }}" class="flex items-center gap-2 text-white font-semibold px-3 py-2 md:px-4 md:py-2.5 rounded-lg hover-bg-naranja-claro hover-text-marron transition-colors duration-150">
+        <i data-feather="sunrise" class="w-5 h-5"></i>
+        <span class="hidden sm:inline">Mañana Actívate</span>
+      </a>
+      <a href="{{ url_for('clubes') }}" class="flex items-center gap-2 text-white font-semibold px-3 py-2 md:px-4 md:py-2.5 rounded-lg hover-bg-naranja-claro hover-text-marron transition-colors duration-150">
+        <i data-feather="activity" class="w-5 h-5"></i>
+        <span class="hidden sm:inline">Clubes</span>
+      </a>
+    </nav>
+  </div>
+  <div class="bg-naranja-claro text-marron text-center text-sm tracking-wide py-2 px-4 shadow-inner">
+    <span class="font-medium">Nuestra experiencia es tu mayor respaldo · Bienestar integral para nuestro talento BI</span>
+  </div>
+</header>

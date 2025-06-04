@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mañana Actívate | Actívate BI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+      :root {
+        --color-naranja: #EEA554;
+        --color-naranja-claro: #ECB579;
+        --color-marron: #B06D00;
+        --color-gris-claro: #F3F4F6;
+      }
+      .bg-naranja { background-color: var(--color-naranja); }
+      .bg-naranja-claro { background-color: var(--color-naranja-claro); }
+      .text-marron { color: var(--color-marron);}
+      .border-naranja { border-color: var(--color-naranja);}
+      .bg-gris-claro { background-color: var(--color-gris-claro);}
+    </style>
+</head>
+<body class="bg-gris-claro min-h-screen font-sans flex flex-col items-center py-8 px-4">
+
+    <!-- Card central -->
+    <div class="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8">
+        <div class="flex items-center gap-3 mb-2">
+            <i data-feather="sunrise" class="w-8 h-8 text-[#EEA554]"></i>
+            <h1 class="text-2xl md:text-3xl font-bold text-[#b06d00]">Mañana Actívate BI</h1>
+        </div>
+        <a href="{{ url_for('index') }}"
+           class="inline-flex items-center gap-2 text-[#b06d00] font-semibold mb-4 hover:underline">
+            <i data-feather="arrow-left" class="w-5 h-5"></i> Volver al inicio
+        </a>
+        <p class="mb-6 text-gray-700">
+            Una mañana donde se promueve la <b>actividad física</b> y la <b>integración</b> de los colaboradores.<br>
+            Se realiza una vez al año entre <span class="font-medium text-[#EEA554]">septiembre y noviembre</span> en las oficinas regionales.
+        </p>
+
+        <h2 class="text-xl font-bold text-[#b06d00] flex items-center gap-2 mb-3"><i data-feather="calendar" class="w-6 h-6 text-[#EEA554]"></i> Cronograma de Actividades</h2>
+        <ul class="space-y-3">
+            <li class="bg-[#fff9f1] px-5 py-3 rounded-xl shadow flex items-center gap-2">
+                <i data-feather="map-pin" class="w-5 h-5 text-[#b06d00]"></i>
+                <span><b>Quito:</b> 8 septiembre 2025 – 08:00-12:00</span>
+            </li>
+            <li class="bg-[#fff9f1] px-5 py-3 rounded-xl shadow flex items-center gap-2">
+                <i data-feather="map-pin" class="w-5 h-5 text-[#b06d00]"></i>
+                <span><b>Guayaquil:</b> 15 septiembre 2025 – 08:00-12:00</span>
+            </li>
+            <li class="bg-[#fff9f1] px-5 py-3 rounded-xl shadow flex items-center gap-2">
+                <i data-feather="map-pin" class="w-5 h-5 text-[#b06d00]"></i>
+                <span><b>Cuenca:</b> 22 septiembre 2025 – 08:00-12:00</span>
+            </li>
+        </ul>
+
+        <div class="mt-8">
+            <h3 class="text-lg font-semibold text-[#b06d00] mb-2 flex items-center gap-2"><i data-feather="star" class="w-5 h-5 text-[#ECB579]"></i> Actividades destacadas</h3>
+            <ul class="flex flex-wrap gap-2">
+                <li class="bg-[#EEA554]/10 text-[#B06D00] px-4 py-1 rounded-full font-medium text-sm shadow">Yoga grupal</li>
+                <li class="bg-[#EEA554]/10 text-[#B06D00] px-4 py-1 rounded-full font-medium text-sm shadow">Zumba & música</li>
+                <li class="bg-[#EEA554]/10 text-[#B06D00] px-4 py-1 rounded-full font-medium text-sm shadow">Juegos deportivos</li>
+                <li class="bg-[#EEA554]/10 text-[#B06D00] px-4 py-1 rounded-full font-medium text-sm shadow">Desayuno saludable</li>
+                <li class="bg-[#EEA554]/10 text-[#B06D00] px-4 py-1 rounded-full font-medium text-sm shadow">Retos de equipo</li>
+                <li class="bg-[#EEA554]/10 text-[#B06D00] px-4 py-1 rounded-full font-medium text-sm shadow">Charlas motivacionales</li>
+            </ul>
+        </div>
+        <p class="text-sm text-gray-400 mt-5 text-right">*La agenda puede variar según la oficina regional.</p>
+    </div>
+    <script>
+      feather.replace();
+    </script>
+</body>
+</html>

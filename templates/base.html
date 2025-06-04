@@ -1,0 +1,94 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Actívate BI{% endblock %} | Banco Internacional</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --color-naranja: #EEA554;
+        --color-naranja-claro: #ECB579;
+        --color-marron: #B06D00;
+        --color-gris-claro: #F3F4F6;
+        --color-blanco: #FFFFFF;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--color-gris-claro);
+        overscroll-behavior: contain;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      main { flex-grow: 1; }
+      .bg-naranja { background-color: var(--color-naranja);}
+      .bg-naranja-claro { background-color: var(--color-naranja-claro);}
+      .text-marron { color: var(--color-marron);}
+      .border-naranja { border-color: var(--color-naranja);}
+      .hover-bg-naranja-claro:hover { background-color: var(--color-naranja-claro);}
+      .hover-text-marron:hover { color: var(--color-marron);}
+      html { scroll-behavior: smooth; }
+      #navbar-main { transition: padding 0.25s cubic-bezier(.4,.0,.2,1), background-color 0.2s ease-in-out;}
+      #navbar-logo { transition: height 0.25s cubic-bezier(.4,.0,.2,1);}
+      @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px);} to { opacity: 1; transform: translateY(0);}}
+      @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: translateY(0);}}
+      .animate-fade-in-down { animation: fadeInDown 0.6s ease-out forwards; }
+      .animate-fade-in-up { animation: fadeInUp 0.6s ease-out 0.2s forwards;}
+      video[poster]{ object-fit: cover;}
+    </style>
+    {% block head_extra %}{% endblock %}
+</head>
+<body class="flex flex-col">
+
+    {% include "navbar.html" %}
+
+    <main class="w-full">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-naranja text-white text-center py-6 md:py-8 shadow-top mt-auto rounded-t-2xl">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p class="text-sm md:text-base">
+          &copy; <span id="currentYear"></span> Banco Internacional S.A. Todos los derechos reservados.
+        </p>
+        <p class="text-xs md:text-sm mt-1 text-white/80">
+          Bienestar para nuestro talento · Sostenibilidad · Innovación
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      feather.replace();
+      // Navbar "shrink on scroll"
+      const navbarMain = document.getElementById('navbar-main');
+      const navbarLogo = document.getElementById('navbar-logo');
+      const scrollThreshold = 50;
+      window.addEventListener('scroll', function() {
+        if (navbarMain && navbarLogo) {
+          if (window.scrollY > scrollThreshold) {
+            navbarMain.classList.remove('py-3', 'md:py-4');
+            navbarMain.classList.add('py-2', 'md:py-2.5');
+            navbarLogo.classList.remove('h-16', 'md:h-20');
+            navbarLogo.classList.add('h-12', 'md:h-16');
+          } else {
+            navbarMain.classList.remove('py-2', 'md:py-2.5');
+            navbarMain.classList.add('py-3', 'md:py-4');
+            navbarLogo.classList.remove('h-12', 'md:h-16');
+            navbarLogo.classList.add('h-16', 'md:h-20');
+          }
+        }
+      });
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
