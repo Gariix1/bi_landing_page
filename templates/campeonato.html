@@ -11,34 +11,8 @@
     </div>
     <!-- Grid principal -->
     <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-<div class="col-span-1 lg:col-span-1 flex flex-col items-center p-4">
-    <div class="w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-lg hover:shadow-xl
-                transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden border border-gray-200/75 flex flex-col">
-        
-        <!-- Imagen arriba, ocupa la mitad de la card -->
-        <div class="w-full aspect-[4/3] sm:aspect-[3/2] bg-[#fff9f1] relative">
-            <img src="{{ url_for('static', filename='img/campeonato-ilustracion.png') }}"
-                 alt="Ilustración Campeonato de Fútbol"
-                 class="absolute inset-0 w-full h-full object-cover object-center" />
-        </div>
-        
-        <!-- Contenido card -->
-        <div class="p-6 sm:p-8 text-center flex flex-col flex-1 justify-between">
-            <blockquote class="text-lg font-medium text-gray-700 leading-relaxed mb-6 relative px-2">
-                <span class="absolute left-0 top-0 text-5xl text-amber-400 -mt-2 font-serif opacity-70 transform -translate-x-1 select-none">“</span>
-                El trabajo en equipo nos hace grandes.<br class="hidden sm:inline"> ¡Actívate, vive tu pasión y haz historia juntos!
-                <span class="absolute right-0 bottom-0 text-5xl text-amber-400 -mb-3 font-serif opacity-70 transform translate-x-1 select-none">”</span>
-            </blockquote>
-            <span class="block text-sm font-semibold text-amber-600 tracking-wide">
-                Banco Internacional
-            </span>
-        </div>
-
-        <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500"></div>
-    </div>
-</div>
-        <!-- Info principal -->
-        <div class="col-span-1 lg:col-span-2 flex flex-col gap-7">
+        <!-- Info principal: primero en móvil, segundo en desktop -->
+        <div class="col-span-1 lg:col-span-2 flex flex-col gap-7 order-1 lg:order-1">
             <!-- Título y descripción -->
             <div>
                 <div class="flex items-center gap-2 mb-2">
@@ -66,28 +40,52 @@
                     <i data-feather="edit" class="w-5 h-5 text-[#ECB579]"></i> Inscribir nuevo equipo
                 </h2>
                 <form method="POST" class="flex flex-col gap-4">
-    <label class="font-semibold text-[#b06d00]">Nombre del equipo
-        <input name="nombre" value="{{ request.form.get('nombre','') }}" placeholder="Nombre del equipo" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
-    </label>
-    <label class="font-semibold text-[#b06d00]">Ciudad
-        <input name="ciudad" value="Quito" readonly
-            class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 bg-gray-100 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
-        <span class="text-xs text-gray-400">Por ahora, solo equipos de Quito.</span>
-    </label>
-    <label class="font-semibold text-[#b06d00]">Categoría
-        <select name="genero" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
-            <option value="">Selecciona</option>
-            <option value="Femenina" {% if request.form.get('genero') == 'Femenina' %}selected{% endif %}>Femenina</option>
-            <option value="Masculina" {% if request.form.get('genero') == 'Masculina' %}selected{% endif %}>Masculina</option>
-        </select>
-    </label>
-    <label class="font-semibold text-[#b06d00]">Integrantes <span class="text-xs font-normal text-gray-500">(mínimo 5, máximo 12, separados por coma)</span>
-        <input name="integrantes" value="{{ request.form.get('integrantes','') }}" placeholder="Nombre1, Nombre2, ..." required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
-    </label>
-    <button type="submit" class="bg-[#EEA554] text-white font-bold py-2 rounded-lg shadow hover:bg-[#ECB579] transition mt-2">
-        Inscribir equipo
-    </button>
-</form>
+                    <label class="font-semibold text-[#b06d00]">Nombre del equipo
+                        <input name="nombre" value="{{ request.form.get('nombre','') }}" placeholder="Nombre del equipo" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
+                    </label>
+                    <label class="font-semibold text-[#b06d00]">Ciudad
+                        <input name="ciudad" value="Quito" readonly
+                            class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 bg-gray-100 text-gray-600 cursor-not-allowed focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
+                        <span class="text-xs text-gray-400">Por ahora, solo equipos de Quito.</span>
+                    </label>
+                    <label class="font-semibold text-[#b06d00]">Categoría
+                        <select name="genero" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
+                            <option value="">Selecciona</option>
+                            <option value="Femenina" {% if request.form.get('genero') == 'Femenina' %}selected{% endif %}>Femenina</option>
+                            <option value="Masculina" {% if request.form.get('genero') == 'Masculina' %}selected{% endif %}>Masculina</option>
+                        </select>
+                    </label>
+                    <label class="font-semibold text-[#b06d00]">Integrantes <span class="text-xs font-normal text-gray-500">(mínimo 5, máximo 12, separados por coma)</span>
+                        <input name="integrantes" value="{{ request.form.get('integrantes','') }}" placeholder="Nombre1, Nombre2, ..." required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
+                    </label>
+                    <button type="submit" class="bg-[#EEA554] text-white font-bold py-2 rounded-lg shadow hover:bg-[#ECB579] transition mt-2">
+                        Inscribir equipo
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- Card Ilustrada Motivacional: segundo en móvil, primero en desktop -->
+        <div class="col-span-1 flex flex-col items-center p-4 order-2 lg:order-2">
+            <div class="w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-lg hover:shadow-xl
+                    transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden border border-gray-200/75 flex flex-col">
+                <!-- Imagen arriba, ocupa la mitad de la card -->
+                <div class="w-full aspect-[4/3] sm:aspect-[3/2] bg-[#fff9f1] relative">
+                    <img src="{{ url_for('static', filename='img/campeonato-ilustracion.png') }}"
+                        alt="Ilustración Campeonato de Fútbol"
+                        class="absolute inset-0 w-full h-full object-cover object-center" />
+                </div>
+                <!-- Contenido card -->
+                <div class="p-6 sm:p-8 text-center flex flex-col flex-1 justify-between">
+                    <blockquote class="text-lg font-medium text-gray-700 leading-relaxed mb-6 relative px-2">
+                        <span class="absolute left-0 top-0 text-5xl text-amber-400 -mt-2 font-serif opacity-70 transform -translate-x-1 select-none">“</span>
+                        El trabajo en equipo nos hace grandes.<br class="hidden sm:inline"> ¡Actívate, vive tu pasión y haz historia juntos!
+                        <span class="absolute right-0 bottom-0 text-5xl text-amber-400 -mb-3 font-serif opacity-70 transform translate-x-1 select-none">”</span>
+                    </blockquote>
+                    <span class="block text-sm font-semibold text-amber-600 tracking-wide">
+                        Banco Internacional
+                    </span>
+                </div>
+                <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500"></div>
             </div>
         </div>
     </div>

@@ -7,35 +7,15 @@
   <div class="w-full flex flex-col items-center px-2 md:px-0 py-8">
     <!-- Volver -->
     <div class="w-full max-w-4xl flex justify-start">
-      <a href="{{ url_for('index') }}" class="inline-flex items-center gap-2 mb-4 text-[#b06d00] font-semibold hover:underline"><i data-feather="arrow-left" class="w-5 h-5"></i> Volver al inicio</a>
+      <a href="{{ url_for('index') }}" class="inline-flex items-center gap-2 mb-4 text-[#b06d00] font-semibold hover:underline">
+        <i data-feather="arrow-left" class="w-5 h-5"></i> Volver al inicio
+      </a>
     </div>
 
     <!-- Grid principal: motivacional + formulario + lista clubes -->
     <div class="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
-      <!-- Card Ilustrada Motivacional -->
-      <div class="col-span-1 flex flex-col items-center p-4">
-        <div class="w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden border border-gray-200/75 flex flex-col">
-          <!-- Imagen arriba, ocupa la mitad de la card -->
-          <div class="w-full aspect-[4/3] sm:aspect-[3/2] bg-[#fff9f1] relative">
-            <img src="{{ url_for('static', filename='img/clubes-ilustracion.png') }}" alt="Ilustración Clubes BI" class="absolute inset-0 w-full h-full object-cover object-center" />
-          </div>
-
-          <!-- Contenido card -->
-          <div class="p-6 sm:p-8 text-center flex flex-col flex-1 justify-between">
-            <blockquote class="text-lg font-medium text-gray-700 leading-relaxed mb-6 relative px-2">
-              <span class="absolute left-0 top-0 text-5xl text-amber-400 -mt-2 font-serif opacity-70 transform -translate-x-1 select-none">“</span>
-              Crecer juntos, compartir talentos. Descubre tu pasión y haz una comunidad con Banco Internacional.
-              <span class="absolute right-0 bottom-0 text-5xl text-amber-400 -mb-3 font-serif opacity-70 transform translate-x-1 select-none">”</span>
-            </blockquote>
-            <span class="block text-sm font-semibold text-amber-600 tracking-wide">Banco Internacional</span>
-          </div>
-
-          <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500"></div>
-        </div>
-      </div>
-
-      <!-- Formulario + Lista de Clubes -->
-      <div class="col-span-1 lg:col-span-2 flex flex-col gap-7">
+      <!-- Formulario + Lista de Clubes (primero en móvil, segundo en escritorio) -->
+      <div class="col-span-1 lg:col-span-2 flex flex-col gap-7 order-1 lg:order-2">
         <!-- Título y descripción -->
         <div>
           <div class="flex items-center gap-2 mb-2">
@@ -53,9 +33,12 @@
         {% endif %}
         <!-- Formulario -->
         <form method="POST" class="bg-white rounded-xl shadow-lg p-6 flex flex-col gap-4">
-          <label class="font-semibold text-[#b06d00]">Nombre<input name="nombre" placeholder="Tu nombre" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" /></label>
+          <label class="font-semibold text-[#b06d00]">Nombre
+            <input name="nombre" placeholder="Tu nombre" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition" />
+          </label>
           <label class="font-semibold text-[#b06d00]">
-            Club<select name="club" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
+            Club
+            <select name="club" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
               <option value="">Selecciona un club</option>
               {% for club in clubes %}
                 <option value="{{ club.nombre }}">{{ club.nombre }}</option>
@@ -63,7 +46,8 @@
             </select>
           </label>
           <label class="font-semibold text-[#b06d00]">
-            Rol<select name="rol" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
+            Rol
+            <select name="rol" required class="mt-1 block w-full border border-[#EEA554] rounded-md px-3 py-2 focus:ring-2 focus:ring-[#EEA554] outline-none transition">
               <option value="">Quiero ser...</option>
               <option value="Coach">Coach</option>
               <option value="Participante">Participante</option>
@@ -100,6 +84,25 @@
               {% endfor %}
             </div>
           </div>
+        </div>
+      </div>
+      <!-- Card Ilustrada Motivacional (después en móvil, primero en escritorio) -->
+      <div class="col-span-1 flex flex-col items-center p-4 order-2 lg:order-1">
+        <div class="w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden border border-gray-200/75 flex flex-col">
+          <!-- Imagen arriba, ocupa la mitad de la card -->
+          <div class="w-full aspect-[4/3] sm:aspect-[3/2] bg-[#fff9f1] relative">
+            <img src="{{ url_for('static', filename='img/clubes-ilustracion.png') }}" alt="Ilustración Clubes BI" class="absolute inset-0 w-full h-full object-cover object-center" />
+          </div>
+          <!-- Contenido card -->
+          <div class="p-6 sm:p-8 text-center flex flex-col flex-1 justify-between">
+            <blockquote class="text-lg font-medium text-gray-700 leading-relaxed mb-6 relative px-2">
+              <span class="absolute left-0 top-0 text-5xl text-amber-400 -mt-2 font-serif opacity-70 transform -translate-x-1 select-none">“</span>
+              Crecer juntos, compartir talentos. Descubre tu pasión y haz una comunidad con Banco Internacional.
+              <span class="absolute right-0 bottom-0 text-5xl text-amber-400 -mb-3 font-serif opacity-70 transform translate-x-1 select-none">”</span>
+            </blockquote>
+            <span class="block text-sm font-semibold text-amber-600 tracking-wide">Banco Internacional</span>
+          </div>
+          <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500"></div>
         </div>
       </div>
     </div>

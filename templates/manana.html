@@ -7,34 +7,15 @@
   <div class="w-full flex flex-col items-center px-2 md:px-0 py-8">
     <!-- Volver -->
     <div class="w-full max-w-3xl flex justify-start">
-      <a href="{{ url_for('index') }}" class="inline-flex items-center gap-2 mb-4 text-[#b06d00] font-semibold hover:underline"><i data-feather="arrow-left" class="w-5 h-5"></i> Volver al inicio</a>
+      <a href="{{ url_for('index') }}" class="inline-flex items-center gap-2 mb-4 text-[#b06d00] font-semibold hover:underline">
+        <i data-feather="arrow-left" class="w-5 h-5"></i> Volver al inicio
+      </a>
     </div>
 
     <!-- Card central motivacional + cronograma y actividades -->
     <div class="w-full max-w-3xl grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- Card Motivacional -->
-      <div class="col-span-1 flex flex-col items-center p-4">
-        <div class="w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden border border-gray-200/75 flex flex-col">
-          <!-- Imagen adaptativa arriba -->
-          <div class="w-full aspect-[4/3] sm:aspect-[3/2] bg-[#fff9f1] relative">
-            <img src="{{ url_for('static', filename='img/manana-ilustracion.png') }}" alt="Ilustración Mañana Actívate" class="absolute inset-0 w-full h-full object-cover object-center" />
-          </div>
-
-          <!-- Contenido motivacional -->
-          <div class="p-6 sm:p-8 text-center flex flex-col flex-1 justify-between">
-            <blockquote class="text-lg font-medium text-gray-700 leading-relaxed mb-6 relative px-2">
-              <span class="absolute left-0 top-0 text-5xl text-amber-400 -mt-2 font-serif opacity-70 transform -translate-x-1 select-none">“</span>
-              Inicia el día con energía y bienestar, juntos creamos grandes historias.
-              <span class="absolute right-0 bottom-0 text-5xl text-amber-400 -mb-3 font-serif opacity-70 transform translate-x-1 select-none">”</span>
-            </blockquote>
-            <span class="block text-sm font-semibold text-amber-600 tracking-wide">Banco Internacional</span>
-          </div>
-          <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500"></div>
-        </div>
-      </div>
-
-      <!-- Cronograma + Actividades -->
-      <div class="col-span-1 lg:col-span-2 flex flex-col gap-7">
+      <!-- Cronograma + Actividades (primero en móvil, segundo en escritorio) -->
+      <div class="col-span-1 lg:col-span-2 flex flex-col gap-7 order-1 lg:order-2">
         <div>
           <div class="flex items-center gap-3 mb-2">
             <i data-feather="sunrise" class="w-8 h-8 text-[#EEA554]"></i>
@@ -47,7 +28,9 @@
         </div>
         <!-- Cronograma -->
         <div>
-          <h2 class="text-xl font-bold text-[#b06d00] flex items-center gap-2 mb-3"><i data-feather="calendar" class="w-6 h-6 text-[#EEA554]"></i> Cronograma de Actividades</h2>
+          <h2 class="text-xl font-bold text-[#b06d00] flex items-center gap-2 mb-3">
+            <i data-feather="calendar" class="w-6 h-6 text-[#EEA554]"></i> Cronograma de Actividades
+          </h2>
           <ul class="space-y-3">
             <li class="bg-[#fff9f1] px-5 py-3 rounded-xl shadow flex items-center gap-2">
               <i data-feather="map-pin" class="w-5 h-5 text-[#b06d00]"></i>
@@ -65,7 +48,9 @@
         </div>
         <!-- Actividades Destacadas -->
         <div>
-          <h3 class="text-lg font-semibold text-[#b06d00] mb-2 flex items-center gap-2"><i data-feather="star" class="w-5 h-5 text-[#ECB579]"></i> Actividades destacadas</h3>
+          <h3 class="text-lg font-semibold text-[#b06d00] mb-2 flex items-center gap-2">
+            <i data-feather="star" class="w-5 h-5 text-[#ECB579]"></i> Actividades destacadas
+          </h3>
           <ul class="flex flex-wrap gap-2">
             <li class="bg-[#EEA554]/10 text-[#B06D00] px-4 py-1 rounded-full font-medium text-sm shadow">Yoga grupal</li>
             <li class="bg-[#EEA554]/10 text-[#B06D00] px-4 py-1 rounded-full font-medium text-sm shadow">Zumba & música</li>
@@ -75,6 +60,25 @@
             <li class="bg-[#EEA554]/10 text-[#B06D00] px-4 py-1 rounded-full font-medium text-sm shadow">Charlas motivacionales</li>
           </ul>
           <p class="text-sm text-gray-400 mt-5 text-right">*La agenda puede variar según la oficina regional.</p>
+        </div>
+      </div>
+      <!-- Card Motivacional (después en móvil, primero en escritorio) -->
+      <div class="col-span-1 flex flex-col items-center p-4 order-2 lg:order-1">
+        <div class="w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 overflow-hidden border border-gray-200/75 flex flex-col">
+          <!-- Imagen adaptativa arriba -->
+          <div class="w-full aspect-[4/3] sm:aspect-[3/2] bg-[#fff9f1] relative">
+            <img src="{{ url_for('static', filename='img/manana-ilustracion.png') }}" alt="Ilustración Mañana Actívate" class="absolute inset-0 w-full h-full object-cover object-center" />
+          </div>
+          <!-- Contenido motivacional -->
+          <div class="p-6 sm:p-8 text-center flex flex-col flex-1 justify-between">
+            <blockquote class="text-lg font-medium text-gray-700 leading-relaxed mb-6 relative px-2">
+              <span class="absolute left-0 top-0 text-5xl text-amber-400 -mt-2 font-serif opacity-70 transform -translate-x-1 select-none">“</span>
+              Inicia el día con energía y bienestar, juntos creamos grandes historias.
+              <span class="absolute right-0 bottom-0 text-5xl text-amber-400 -mb-3 font-serif opacity-70 transform translate-x-1 select-none">”</span>
+            </blockquote>
+            <span class="block text-sm font-semibold text-amber-600 tracking-wide">Banco Internacional</span>
+          </div>
+          <div class="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500"></div>
         </div>
       </div>
     </div>
